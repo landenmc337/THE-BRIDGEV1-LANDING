@@ -6,7 +6,6 @@ export default function OverlayPreview() {
   return (
     <section className="px-6 pb-24">
       <div className="mx-auto max-w-6xl">
-        {/* Section Title */}
         <div className="mb-10 text-center">
           <h2 className="text-4xl font-black">
             See The Bridge in Action
@@ -17,13 +16,10 @@ export default function OverlayPreview() {
           </p>
         </div>
 
-        {/* Glow */}
         <div className="relative">
           <div className="absolute inset-0 rounded-3xl bg-cyan-500/10 blur-3xl" />
 
-          {/* Window */}
           <div className="relative overflow-hidden rounded-3xl border border-zinc-800 bg-zinc-900 shadow-2xl">
-            {/* Window Header */}
             <div className="flex items-center justify-between border-b border-zinc-800 bg-zinc-900 px-5 py-3">
               <div className="flex items-center gap-2">
                 <div className="h-3 w-3 rounded-full bg-red-500" />
@@ -40,9 +36,7 @@ export default function OverlayPreview() {
               </div>
             </div>
 
-            {/* App Layout */}
             <div className="grid md:grid-cols-[260px_1fr]">
-              {/* Sidebar */}
               <div className="border-r border-zinc-800 bg-zinc-900 p-6">
                 <div className="mb-8 flex items-center gap-3">
                   <Image
@@ -52,13 +46,7 @@ export default function OverlayPreview() {
                     height={42}
                     className="rounded-lg"
                   />
-<div className="mt-auto pt-8">
-  <div className="rounded-lg border border-emerald-500/20 bg-emerald-500/10 p-3">
-    <p className="text-xs text-emerald-400">
-      ● Connected to Chat Bridge
-    </p>
-  </div>
-</div>
+
                   <div>
                     <h4 className="font-bold text-white">
                       The Bridge
@@ -92,57 +80,66 @@ export default function OverlayPreview() {
                   </button>
                 </div>
 
+                <div className="mt-8 rounded-lg border border-emerald-500/20 bg-emerald-500/10 p-3">
+                  <p className="text-xs text-emerald-400">
+                    ● Connected to Chat Bridge
+                  </p>
+                </div>
+
                 <div className="mt-10 rounded-xl border border-zinc-800 bg-zinc-950 p-4">
                   <p className="text-xs uppercase tracking-widest text-zinc-500">
                     Session
                   </p>
 
-                  <div className="mt-4 space-y-4">
-                    <div>
-                      <p className="text-2xl font-bold text-white">4</p>
-                      <p className="text-sm text-zinc-500">
-                        Connected Platforms
-                     <div className="grid grid-cols-2 gap-4">
-  <div className="flex items-center gap-2">
-    <Image src="/platforms/twitch.png" alt="Twitch" width={18} height={18} />
-    <span>Twitch</span>
-  </div>
+                  <div className="mt-4">
+                    <p className="text-2xl font-bold text-white">4</p>
 
-  <div className="flex items-center gap-2">
-    <Image src="/platforms/kick2.png" alt="Kick" width={18} height={18} />
-    <span>Kick</span>
-  </div>
+                    <p className="mt-2 text-sm text-zinc-500">
+                      Connected Platforms
+                    </p>
 
-  <div className="flex items-center gap-2">
-    <Image src="/platforms/youtube.png" alt="YouTube" width={18} height={18} />
-    <span>YouTube</span>
-  </div>
+                    <div className="mt-3 grid grid-cols-2 gap-4 text-sm">
+                      <div className="flex items-center gap-2">
+                        <Image src="/platforms/twitch.png" alt="Twitch" width={18} height={18} />
+                        <span>Twitch</span>
+                      </div>
 
-  <div className="flex items-center gap-2">
-    <Image src="/platforms/tiktok.png" alt="TikTok" width={18} height={18} />
-    <span>TikTok</span>
-  </div>
-</div>
-                        Filters Active
-                      </p>
+                      <div className="flex items-center gap-2">
+                        <Image src="/platforms/kick2.png" alt="Kick" width={18} height={18} />
+                        <span>Kick</span>
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        <Image src="/platforms/youtube.png" alt="YouTube" width={18} height={18} />
+                        <span>YouTube</span>
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        <Image src="/platforms/tiktok.png" alt="TikTok" width={18} height={18} />
+                        <span>TikTok</span>
+                      </div>
                     </div>
+
+                    <p className="mt-4 text-sm text-zinc-500">
+                      Filters Active
+                    </p>
                   </div>
                 </div>
               </div>
 
-              {/* Chat Preview */}
               <div className="h-[700px] overflow-y-auto bg-zinc-950 p-8">
+                <div className="mb-6 flex items-center justify-between rounded-xl border border-zinc-800 bg-zinc-900 p-3">
+                  <span className="text-sm text-zinc-400">
+                    Overlay Preview
+                  </span>
+
+                  <span className="rounded bg-cyan-500/20 px-3 py-1 text-xs text-cyan-300">
+                    Connected
+                  </span>
+                </div>
+
                 <div className="mb-8 flex items-center justify-between">
                   <h3 className="text-lg font-bold text-white">
-                    <div className="mb-6 flex items-center justify-between rounded-xl border border-zinc-800 bg-zinc-900 p-3">
-  <span className="text-sm text-zinc-400">
-    Overlay Preview
-  </span>
-
-  <span className="rounded bg-cyan-500/20 px-3 py-1 text-xs text-cyan-300">
-    Connected
-  </span>
-</div>
                     Live Chat
                   </h3>
 
@@ -180,7 +177,8 @@ export default function OverlayPreview() {
                 </div>
 
                 <div className="space-y-6">
-                  <ChatMessage
+
+               <ChatMessage
                     platform="twitch"
                     username="is2511"
                     usernameColor="#A970FF"
@@ -247,7 +245,7 @@ export default function OverlayPreview() {
                     platform="youtube"
                     username="4k_gang_vibz"
                     usernameColor="#FF4D4D"
-                    message="This is exactly what the streaming community needed"
+                    message="This is exactly what the streaming community needed."
                   />
                 </div>
               </div>
