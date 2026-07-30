@@ -9,34 +9,34 @@ export default function Hero() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  const handleSubmit = async () => {
-    if (!email.trim()) {
-      setMessage("Please enter your email.");
-      return;
-    }
+const handleSubmit = async () => {
+  if (!email.trim()) {
+    setMessage("Please enter your email.");
+    return;
+  }
 
-    setLoading(true);
-    setMessage("");
+  setLoading(true);
+  setMessage("");
 
-    const { error } = await supabase
-      .from("waitlist")
-      .insert([{ email }]);
+  const { error } = await supabase
+    .from("waitlist")
+    .insert([{ email }]);
 
-    if (error) {
-      if (error.code === "23505") {
-        setMessage("You're already on the waitlist! 🎉");
-      } else {
-        console.error(error);
-        setMessage("Something went wrong. Please try again.");
-      }
+  if (error) {
+    console.error(error);
+
+    if (error.code === "23505") {
+      setMessage("You're already on the waitlist! 🎉");
     } else {
-      setMessage("🎉 You're on the waitlist!");
-      setEmail("");
+      setMessage(error.message);
     }
+  } else {
+    setMessage("🎉 You're on the waitlist!");
+    setEmail("");
+  }
 
-    setLoading(false);
-  };
-
+  setLoading(false);
+};
   return (
     <section className="relative overflow-hidden px-6 py-24">
       {/* Background Glow */}
