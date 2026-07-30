@@ -9,34 +9,44 @@ export default function Hero() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-const handleSubmit = async () => {
-  if (!email.trim()) {
-    setMessage("Please enter your email.");
-    return;
-  }
+  const handleSubmit = async () => {
+    const cleanedEmail = email.trim().toLowerCase();
 
-  setLoading(true);
-  setMessage("");
-
-  const { error } = await supabase
-    .from("waitlist")
-    .insert([{ email }]);
-
-  if (error) {
-    console.error(error);
-
-    if (error.code === "23505") {
-      setMessage("You're already on the waitlist! 🎉");
-    } else {
-      setMessage(error.message);
+    if (!cleanedEmail) {
+      setMessage("Please enter your email.");
+      return;
     }
-  } else {
-    setMessage("🎉 You're on the waitlist!");
-    setEmail("");
-  }
 
-  setLoading(false);
-};
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(cleanedEmail)) {
+      setMessage("Please enter a valid email address.");
+      return;
+    }
+
+    setLoading(true);
+    setMessage("");
+
+    const { error } = await supabase
+      .from("waitlist")
+      .insert([{ email: cleanedEmail }]);
+
+    if (error) {
+      console.error(error);
+
+      if (error.code === "23505") {
+        setMessage("You're already on the waitlist!");
+      } else {
+        setMessage("Something went wrong. Please try again.");
+      }
+    } else {
+      setMessage("You're on the waitlist!");
+      setEmail("");
+    }
+
+    setLoading(false);
+  };
+
   return (
     <section className="relative overflow-hidden px-6 py-24">
       {/* Background Glow */}
@@ -55,7 +65,7 @@ const handleSubmit = async () => {
           width={170}
           height={170}
           priority
-          className="mb-8 object-contain drop-shadow-2xl"
+          className="mb-8 h-auto object-contain drop-shadow-2xl"
         />
 
         {/* Title */}
