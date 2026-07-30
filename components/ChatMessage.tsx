@@ -16,15 +16,16 @@ export default function ChatMessage({
   badge,
 }: ChatMessageProps) {
   const badgeIcons = {
-  mod: "🛡️",
-  vip: "💎",
-  sub: "⭐",
-  verified: "✔️",
-} as const;
+    mod: "🛡️",
+    vip: "💎",
+    sub: "⭐",
+    verified: "✔️",
+  } as const;
 
-const badgeIcon = badge ? badgeIcons[badge] : null;
+  const badgeIcon = badge ? badgeIcons[badge] : null;
+
   return (
-    <div className="flex items-start gap-3 rounded-lg px-3 py-2 transition-all duration-200 hover:bg-zinc-900">
+    <div className="flex items-start gap-4 rounded-xl px-4 py-3 transition-all duration-200 hover:bg-zinc-900/80">
       <Image
         src={
           platform === "kick"
@@ -32,28 +33,28 @@ const badgeIcon = badge ? badgeIcons[badge] : null;
             : `/platforms/${platform}.png`
         }
         alt={platform}
-        width={22}
-        height={22}
-        className="mt-1"
+        width={24}
+        height={24}
+        className="mt-1 select-none"
       />
 
       <div className="flex-1">
         <div className="flex items-center gap-2">
           {badgeIcon && (
-            <span className="text-sm">
+            <span className="text-base">
               {badgeIcon}
             </span>
           )}
 
           <span
-            className="font-bold"
+            className="text-[17px] font-extrabold tracking-tight"
             style={{ color: usernameColor }}
           >
             {username}
           </span>
         </div>
 
-        <p className="mt-1 leading-relaxed text-white">
+        <p className="mt-1 text-[17px] font-medium leading-7 text-zinc-100">
           {message}
         </p>
       </div>
