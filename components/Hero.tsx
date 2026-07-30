@@ -1,6 +1,42 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
+import { supabase } from "@/lib/supabase";
 
 export default function Hero() {
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = async () => {
+    if (!email.trim()) {
+      setMessage("Please enter your email.");
+      return;
+    }
+
+    setLoading(true);
+    setMessage("");
+
+    const { error } = await supabase
+      .from("waitlist")
+      .insert([{ email }]);
+
+    if (error) {
+      if (error.code === "23505") {
+        setMessage("You're already on the waitlist! 🎉");
+      } else {
+        console.error(error);
+        setMessage("Something went wrong. Please try again.");
+      }
+    } else {
+      setMessage("🎉 You're on the waitlist!");
+      setEmail("");
+    }
+
+    setLoading(false);
+  };
+
   return (
     <section className="relative overflow-hidden px-6 py-24">
       {/* Background Glow */}
@@ -38,18 +74,35 @@ export default function Hero() {
           customizable chat overlay built for creators.
         </p>
 
-        {/* Email */}
+        {/* Email Signup */}
         <div className="mt-10 flex w-full max-w-2xl flex-col gap-4 sm:flex-row">
           <input
             type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleSubmit();
+              }
+            }}
             placeholder="Enter your email for early access"
             className="h-14 flex-1 rounded-xl border border-zinc-700 bg-zinc-900 px-5 text-white outline-none transition focus:border-cyan-400"
           />
 
-          <button className="h-14 rounded-xl bg-cyan-400 px-8 font-bold text-black transition hover:bg-cyan-300">
-            Get Early Access
+          <button
+            onClick={handleSubmit}
+            disabled={loading}
+            className="h-14 rounded-xl bg-cyan-400 px-8 font-bold text-black transition hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {loading ? "Joining..." : "Get Early Access"}
           </button>
         </div>
+
+        {message && (
+          <p className="mt-4 text-sm font-medium text-cyan-400">
+            {message}
+          </p>
+        )}
 
         {/* Buttons */}
         <div className="mt-8 flex flex-col gap-4 sm:flex-row">
